@@ -10,6 +10,7 @@ from typing import List
 
 from order import Vehicle
 from order import Order
+from order import Item
 
 
 class LogisticSystem:
