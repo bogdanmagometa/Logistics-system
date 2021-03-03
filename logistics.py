@@ -59,6 +59,7 @@ class LogisticSystem:
         """
         try:
             vehicle = next(vehicle for vehicle in self.vehicles if vehicle.is_available)
+            order.assign_vehicle(vehicle)
             self.orders.append(order)
             vehicle.is_available = False
         except StopIteration:
