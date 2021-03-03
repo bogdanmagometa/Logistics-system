@@ -33,7 +33,7 @@ class LogisticSystem:
     """
     def __init__(self, vehicles: List[Vehicle]) -> None:
         """Initialize logistics system with vehicles andd orders (empty list).
-        
+
         >>> vehicles = [Vehicle(1), Vehicle(10)]
         >>> logistics_sys = LogisticSystem(vehicles)
         >>> logistics_sys.placeOrder(Order("Bohdan", "Lviv", 2, [Item("Arduino", 200)]))

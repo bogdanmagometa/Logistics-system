@@ -61,11 +61,11 @@ class Menu:
 
     def intro(self) -> List[Vehicle]:
         """Ask user the initial vehicles of logistics system and return them."""
-        # ask number of vehicle
+        # ask number of vehicles
         while True:
             try:
                 num_vehicles = int(input("Enter number of initial vehicles: "))
-                assert num_vehicles > 0
+                assert num_vehicles >= 0
                 break
             except (ValueError, AssertionError):
                 print("You had to enter a positive integer.")
@@ -122,6 +122,7 @@ class Menu:
                 entered_invalid = False
                 os.system("cls") if os.name == "nt" else os.system("clear")
                 action()
+                input("\nPress enter to continue...")
             else:
                 entered_invalid = True
 
@@ -156,7 +157,6 @@ class Menu:
                                         + " "*space_btw_cols + f"{unavailable_veh: <{max_length}}")
         else:
             print("There are no vehicles yet.")
-        input("\nPress enter to continue...")
 
     def add_vehicle(self) -> None:
         """Ask user the number of new vehicle and add it to logistics system."""
@@ -174,7 +174,6 @@ class Menu:
             print(f"New vehicle with number {num} successfully added!")
 
             self.logistics_system.vehicles.append(Vehicle(num))
-        input("\nPress enter to continue...")
 
     def list_orders(self) -> None:
         """Show user all the orders in logistics system."""
@@ -185,7 +184,6 @@ class Menu:
                 print(str(idx) + ") " + str(order))
         else:
             print("There are no orders created yet.")
-        input("\nPress enter to continue...")
 
     def add_order(self) -> None:
         """Ask user parameters of an order and add it to logistics system."""
@@ -225,7 +223,6 @@ class Menu:
         print()
         order = Order(user_name, city, postoffice, items)
         self.logistics_system.placeOrder(order)
-        input("\nPress enter to continue...")
 
     def track_order(self) -> None:
         """Ask user order id and print info about corresponding order if found."""
@@ -241,7 +238,6 @@ class Menu:
 
         # track order
         self.logistics_system.trackOrder(order_id)
-        input("\nPress enter to continue...")
 
 
 if __name__ == "__main__":
