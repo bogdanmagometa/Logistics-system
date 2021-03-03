@@ -15,7 +15,7 @@ from typing import List
 
 class Item:
     """A class used to represent an item for logistics system.
-    
+
     Attributes
     ----------
     name : str
@@ -40,9 +40,9 @@ class Item:
 
         >>> item = Item("shoes", 240)
         >>> print(item)
-        The item with name shoes and price 240
+        shoes
         """
-        return f"The item with name {self.name} and price {self.price}"
+        return self.name
 
 
 class Vehicle:
@@ -109,7 +109,7 @@ class Order:
 
     def __str__(self) -> str:
         """Return human-readable represenation of an order.
-        
+
         >>> order = Order("Ivan", "Kyiv", "42", ['computer'])
         Your order number is 1.
         >>> print(order)
@@ -122,7 +122,7 @@ office {self.location.postoffice}."
             text += " The item"
             if len(self.items) == 1:
                 return text + f" is {self.items[0]}."
-            return text + f"s are {', '.join(self.items)}."
+            return text + f"s are {', '.join(map(str, self.items))}."
         return text
 
     def calculate_amount(self) -> float:

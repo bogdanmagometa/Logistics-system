@@ -1,4 +1,10 @@
-import time
+"""
+menu.py
+
+The module provides Menu class.
+Refer to Menu class documentation for more.
+"""
+
 import os
 from itertools import zip_longest
 from typing import List
@@ -67,19 +73,26 @@ class Menu:
         # ask numbers of vehicles
         vehicles = []
         for num_vehicle in range(1, num_vehicles+1):
-            ending = "st" if num_vehicle == 1 else "nd" if num_vehicle == 2 else "rd" if num_vehicle == 3 else "th"
+            if num_vehicle == 1:
+                ending = "st"
+            elif num_vehicle == 2:
+                ending = "nd"
+            elif num_vehicle == 3:
+                ending = "rd"
+            else:
+                ending = "th"
             while True:
                 try:
                     vehicle_no = int(input(f"Enter the number of {num_vehicle}{ending} vehicle: "))
                     assert vehicle_no > 0
                     vehicles.append(Vehicle(vehicle_no))
                     break
-                except (TypeError, AssertionError):
+                except (ValueError, AssertionError):
                     print("You had to enter a postive integer.")
         return vehicles
 
     def display_menu(self) -> None:
-        """Display an actual menu menu to user."""
+        """Display an actual menu (with options) to user."""
 
         print("Logistics system menu")
         print()
@@ -129,7 +142,7 @@ class Menu:
             print(indent*" " + max_length*'-' + " "*space_btw_cols + "-"*max_length)
 
             # print columns
-            available_vehicles = filter(lambda x: x.is_available, 
+            available_vehicles = filter(lambda x: x.is_available,
                                                                     self.logistics_system.vehicles)
             unavailable_vehicles = filter(lambda x: not x.is_available,
                                                                     self.logistics_system.vehicles)
@@ -137,8 +150,8 @@ class Menu:
                                             available_vehicles) #TODO: rewrite with operator module
             unavailable_vehicles = map(lambda x: x.vehicle_no,
                                         unavailable_vehicles) #TODO: rewrite with operator module
-            for available_veh, unavailable_veh in zip_longest(available_vehicles, 
-                                                                    unavailable_vehicles, fillvalue=""):
+            for available_veh, unavailable_veh in zip_longest(available_vehicles,
+                                                                unavailable_vehicles, fillvalue=""):
                 print(indent*" " + f"{available_veh: <{max_length}}"
                                         + " "*space_btw_cols + f"{unavailable_veh: <{max_length}}")
         else:
@@ -157,7 +170,7 @@ class Menu:
         if num < 0:
             print("You had to enter a nonnegative integer.")
         else:
-            #TODO: implement handling of collisions  
+            #TODO: implement handling of collisions
             print(f"New vehicle with number {num} successfully added!")
 
             self.logistics_system.vehicles.append(Vehicle(num))
@@ -196,7 +209,10 @@ class Menu:
                 print("You had to enter a nonnegative interger.")
         items = []
         for num_item in range(1, num_items+1):
-            ending = "st" if num_item == 1 else "nd" if num_item == 2 else "rd" if num_item == 3 else "th"
+            if num_item > 3:
+                ending = "th"
+            else:
+                ending = "st" if num_item == 1 else "nd" if num_item == 2 else "rd"
             while True:
                 try:
                     name = input(f"\nEnter name of the {num_item}{ending} item: ")
